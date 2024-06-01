@@ -2,6 +2,14 @@ let pageSwiper = new Swiper('.swiper-page', {
     direction: 'vertical',
     height: window.outerHeight,
     spaceBetween: 20,
+    on: {
+      resize: function(){
+        pageSwiper.params.height = window.outerHeight;
+        for ( var i = 0; i < pageSwiper.slides.length; i++ ){
+          pageSwiper.slides[i].style.height = `${window.outerHeight}px`;
+        }
+      },
+    }
 })
 
 var count = 200;
