@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="res/css.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bb8765517f6113ee6fa953d498baaa2a"></script>
+    <title>양새벽의 첫 번째 생일 인사</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="swiper-page">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="inner">
+                        <h1>
+                            <span class="word">
+                                <span>양</span>
+                                <span>새</span>
+                                <span>벽</span>
+                                <span>의</span>
+                            </span>
+                            <span class="word">
+                                <span>첫</span>
+                                <span>번</span>
+                                <span>째</span>
+                            </span>
+                            <span class="word">
+                                <span>생</span>
+                                <span>일</span>
+                            </span>
+                            <span class="word">
+                                <span>잔</span>
+                                <span>치</span>
+                            </span>
+                        </h1>
+                        <p>
+                            우리의 가족과 친구 여러분.<br>
+                            새벽이의 첫 번째 생일에 초대합니다.<br>
+                            기쁜 마음으로 초대에 응해 주시면 감사하겠습니다.🎉
+                        </p>
+                        <div class="circle">
+                            <img src="res/imgs/circle.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="inner">
+                        <div id="map" style="width: 100%; height: 50%;"></div>
+                        <table>
+                            <colgroup>
+                                <col width="30%" />
+                                <col width="70%" />
+                            </colgroup>
+                            <tr>
+                                <th>날짜</th>
+                                <td>2024.06.15 낮 12시</td>
+                            </tr>
+                            <tr>
+                                <th>장소</th>
+                                <td>롯데시티호텔 구로 pearl1<br>(서울 구로구 디지털로 300 지밸리비즈플라자)</td>
+                            </tr>
+                            <tr>
+                                <th>주차</th>
+                                <td>주차장은 B2 ~ B4를 이용하세요.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let pageSwiper = new Swiper('.swiper-page', {
+            direction: 'vertical',
+            height: window.outerHeight,
+            spaceBetween: 20,
+            on: {
+            resize: function(){
+                pageSwiper.params.height = window.outerHeight;
+                for ( var i = 0; i < pageSwiper.slides.length; i++ ){
+                pageSwiper.slides[i].style.height = `${window.outerHeight}px`;
+                }
+            },
+            }
+        })
+
+        var count = 200;
+        var defaults = {
+        origin: { y: 0.7 }
+        };
+
+        function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+        });
+        }
+
+        fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+        });
+        fire(0.2, {
+        spread: 60,
+        });
+        fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+        });
+        fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+        });
+        fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+        });
+
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(37.48529903978291, 126.89692206617288),
+            level: 2
+        };
+
+        var map = new kakao.maps.Map(container, options);
+        var markerPosition  = new kakao.maps.LatLng(37.48529903978291, 126.89692206617288); 
+
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        marker.setMap(map);
+
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    </script>
+</body>
+</html>

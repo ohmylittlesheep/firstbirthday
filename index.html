@@ -126,16 +126,58 @@
                         <img src="res/imgs/end.jpg" alt="" />
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="inner">
-                        <p>
-                            <div id="map" style="width:500px;height:400px;"></div>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    <script src="res/js.js"></script>
+    <script>
+        let pageSwiper = new Swiper('.swiper-page', {
+            direction: 'vertical',
+            height: window.outerHeight,
+            spaceBetween: 20,
+            on: {
+            resize: function(){
+                pageSwiper.params.height = window.outerHeight;
+                for ( var i = 0; i < pageSwiper.slides.length; i++ ){
+                pageSwiper.slides[i].style.height = `${window.outerHeight}px`;
+                }
+            },
+            }
+        })
+
+        var count = 200;
+        var defaults = {
+        origin: { y: 0.7 }
+        };
+
+        function fire(particleRatio, opts) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio)
+        });
+        }
+        fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+        });
+        fire(0.2, {
+        spread: 60,
+        });
+        fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+        });
+        fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+        });
+        fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+        });
+    </script>
 </body>
 </html>

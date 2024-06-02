@@ -50,8 +50,27 @@ fire(0.1, {
 
 var container = document.getElementById('map');
 		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
+			center: new kakao.maps.LatLng(37.48529903978291, 126.89692206617288),
+			level: 2
 		};
 
 		var map = new kakao.maps.Map(container, options);
+
+    // 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(37.48529903978291, 126.89692206617288); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+    
+});
